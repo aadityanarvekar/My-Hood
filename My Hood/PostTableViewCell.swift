@@ -10,15 +10,22 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var postImage: UIImageView!
+    @IBOutlet weak var postTitle: UILabel!
+    @IBOutlet weak var postDescription: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        // Rounded corners to view
+        postImage.layer.cornerRadius = 20
+        postImage.layer.masksToBounds = true
     }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    func configureCell(post: Post) {
+        postTitle.text = post.title
+        postDescription.text = post.postDescription
+        postImage.image = DataService.dataInstance.imageFromPath(post.imagePath)
     }
 
 }
